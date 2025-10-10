@@ -1,3 +1,11 @@
 man command
 command --help
 
+pwd
+
+cd ..
+cd /home
+
+ls
+ls -a
+ls -l
