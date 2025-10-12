@@ -3,9 +3,27 @@ command --help
 
 pwd
 
+touch {file}
+
 cd ..
 cd /home
 
 ls
 ls -a
 ls -l
+
+vim {file}
+:q
+:q!
+:wq
+:set nu
+:set nonu
+
+i/a/o ESC
+
+ping {ip}
+ifconfig
+hostname
+
+ls /usr/sbin/ | grep service
+
