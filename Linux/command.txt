@@ -79,7 +79,27 @@ unzip -d {dir} {filename}
 tar -zcvf {filename}.tar.gz {file/dir}
 tar -zxvf {filename}.tar.gz -C {dir}
 
+rpm -qa
+rpm -qa | grep firefox
+rpm -qi firefox
+rpm -ql firefox-68.10.0-1.el7.centos.x86_64
+rpm -e firefox-68.10.0-1.el7.centos.x86_64
+rpm -ivh firefox-68.10.0-1.el7.centos.x86_64.rpm
 
+yum list | grep firefox
+yum -y install/update/remove/list/check-update firefox.x86_64
+
+ps aux | more
+ps aux | grep xxx
+ps -ef | grep xxx
+kill {pid}
+kill -9 {pid}
+killall sshd
+pstree
+pstree -p
+top
+
+netstat -anp | grep 6046
 
 
 
