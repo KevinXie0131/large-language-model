@@ -1,16 +1,8 @@
-man command
+man {command}
+man -f {command}
 command --help
-
-pwd
-
-touch {file}
-
-cd ..
-cd /home
-
-ls
-ls -a
-ls -l
+help {command}
+type {command}
 
 vim {file}
 :q
@@ -18,7 +10,6 @@ vim {file}
 :wq
 :set nu
 :set nonu
-
 i/a/o ESC
 
 ping {ip}
@@ -26,4 +17,69 @@ ifconfig
 hostname
 
 ls /usr/sbin/ | grep service
+su
+su {username}
+sudo {command}
+whoami
+alias
+which ls
+whereis ls
+
+pwd
+cd ..
+cd /home
+ls
+ls -a
+ls -l -> ll
+ls -al
+
+mkdir {dir}
+mkdir -p {dir}
+rmdir {dir}
+rmdir -p {dir}
+
+touch {file}
+cp {source} {dest}
+cp -r {source} {dest}
+
+rmdir {file/dir}
+rmdir -r {file/dir}
+rmdir -f {file/dir}
+rmdir -f ./*
+
+mv {source} {dest}
+
+cat {file}
+cat -n {file}
+more {file}
+less {file}
+
+echo "content" > {file}
+echo "content" >> {file}
+echo $PATH
+
+head {file}
+head -n 5 {file}
+tail {file}
+tail -f {file}
+
+chmod ugoa=rwx {file}
+chmod ugoa+rwx {file}
+chmod ugoa-rwx {file}
+chmod 421 {file}
+chmod -R 421 {dir}
+
+grep -n {content} {file}
+ls | grep .cfg
+
+gzip {file}
+gunzip {file}
+zip -r {filename} {dir}
+unzip -d {dir} {filename}
+tar -zcvf {filename}.tar.gz {file/dir}
+tar -zxvf {filename}.tar.gz -C {dir}
+
+
+
+
 
