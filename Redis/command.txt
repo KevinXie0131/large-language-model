@@ -1,0 +1,95 @@
+yum install -y gcc tcl
+tar -xzf redis-6.2.6.tar.gz
+make && make install
+
+redis-server redis.conf
+ps -ef | grep redis
+kill -9 {pid}
+
+redis-cli -h 192.168.10.100 -p 6379 -a 123456
+ping
+AUTH 123456
+
+help @generic
+help @string
+help @list
+help @hash
+help @set
+help @sorted_set
+help keys
+
+keys *
+keys nam*
+keys nam?
+del name
+del k1 k2 k3
+exists name
+expire name {seconds}
+ttl name
+
+-String-
+set name tom
+get name
+mset k1 v1 k2 v2 k3 v3
+mget k1 k2
+incr age
+incrby age -2
+incrbyfloat fee 1.2
+setnx name1 tom
+setex name1 4 tom
+set name1 tom ex 4
+
+set heima.user.1 '{"name":"tom",age:1}'
+set heima.user.2 '{"name":"jack",age:2}'
+set heima.product.1 '{"name":"xiaomi",price:10}'
+set heima.product.2 '{"name":"apple",price:20}'
+
+-Hash-
+hset hkey1 f1 v1
+hset hkey1 f2 v2
+hget hkey1 f1
+hmset hkey2 f3 v3 f4 v4
+hmget hkey2 f3 f4
+hgetall hkey2
+hkeys hkey2
+hvals hkey2
+hincrby hkey3 age 3
+hsetnx hkey3 age 2
+
+--List--
+lpush lkey1 a1 a2 a3
+lpop lkey1  1
+rpush lkey1 b1 b2 b3
+rpop lkey1 2
+lrange lkey1 2 4
+blpop lkey2 {second}
+
+--Set--
+sadd skey1 a1 a2 a3
+srem skey1 a2
+scard skey1
+sismember skey1 a1
+smembers skey1
+sinter skey1 skey2
+sdiff skey2 skey1
+sunion skey1 skey2
+
+-SortedSet-
+zadd stu 87 tom 91 jack 83 mary 98 lucy 70 rose
+zrem stu tom jack
+zscore stu lucy
+zrank stu lucy
+zrevrank stu lucy
+zcard stu
+zcount stu 0 80
+zincrby stu 10 lucy
+zrange stu 0 2
+zrevrange stu 0 2
+zrangebyscore stu 0 80
+
+
+
+
+
+
+

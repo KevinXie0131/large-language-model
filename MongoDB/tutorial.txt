@@ -1,3 +1,9 @@
 https://zhenye-na.github.io/blog/2020/01/27/intro-to-mongodb.html
 
 https://zhenye-na.github.io/blog/2020/02/07/advanced-mongodb.html
+
+MongoDB Essential Training
+https://github.com/LinkedInLearning/mongoDB-essential-training-3023263
+
+Learning MongoDB
+https://github.com/LinkedInLearning/introduction-to-mongodb-4315215
