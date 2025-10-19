@@ -10,6 +10,8 @@ redis-cli -h 192.168.10.100 -p 6379 -a 123456
 ping
 AUTH 123456
 
+systemctl stop firewalld
+
 help @generic
 help @string
 help @list
@@ -23,21 +25,35 @@ keys nam*
 keys nam?
 del name
 del k1 k2 k3
+unlink k1
 exists name
 expire name {seconds}
 ttl name
+type key
+flushall (delete all keys)
+flushdb
+dbsize
+select 1
 
 -String-
 set name tom
 get name
 mset k1 v1 k2 v2 k3 v3
 mget k1 k2
+msetnx k1 v1 k2 v2
+append name jack
+strlen name
 incr age
+decr age
 incrby age -2
 incrbyfloat fee 1.2
 setnx name1 tom
 setex name1 4 tom
 set name1 tom ex 4
+set name1 tom ex 4 XX
+getrange name 1 3
+setrange name 3 B
+getset name lucy
 
 set heima.user.1 '{"name":"tom",age:1}'
 set heima.user.2 '{"name":"jack",age:2}'
@@ -55,14 +71,29 @@ hkeys hkey2
 hvals hkey2
 hincrby hkey3 age 3
 hsetnx hkey3 age 2
+hdel hkey3 age
+hexists hkey3 age
+hlen hk2
 
 --List--
 lpush lkey1 a1 a2 a3
+lpop lkey1
 lpop lkey1  1
 rpush lkey1 b1 b2 b3
+rpop lkey1
 rpop lkey1 2
+rpoplpush lkey1 lkey1
 lrange lkey1 2 4
+lrange lkey1 0 -1 (all elements)
+lrange lkey1 0 0
+lrange lkey1 1 1
 blpop lkey2 {second}
+llen lkey1
+ltrim lkey1 2 4
+lindex lkey1 2
+linsert lkey1 before/after vb VB
+lrem lkey1 1 bVV
+lset lkey1 2 vv
 
 --Set--
 sadd skey1 a1 a2 a3
@@ -70,6 +101,10 @@ srem skey1 a2
 scard skey1
 sismember skey1 a1
 smembers skey1
+srem skey1 v2
+spop skey1
+srandmember skey1 1
+smove skey1 skey2 v2
 sinter skey1 skey2
 sdiff skey2 skey1
 sunion skey1 skey2
@@ -84,12 +119,41 @@ zcard stu
 zcount stu 0 80
 zincrby stu 10 lucy
 zrange stu 0 2
+zrange stu 0 -1 (all elements)
+zrange stu 0 -1 WITHSCORES
 zrevrange stu 0 2
-zrangebyscore stu 0 80
+zrangebyscore stu 70 80
+zrangebyscore stu 70 80 WITHSCORES
+zrevrangebyscore stu 80 70 WITHSCORES
 
+-bitmap-
+setbit bitkey1 6 1
+getbit bitkey1 6
+bitcount bitkey1
+bitcount bitkey1 1 3
+bitcount bitkey1 1 -2
+setbit bitkey1 5 1
+bitop and bitkey3and bitkey1 bitkey2
+bitop or bitkey3and bitkey1 bitkey2
 
+-HyperLogLog-
+pfadd hyperKey1 s1 s2 s3
+pfcount hyperKey1
+pfmerge hyperKey3 hyperKey1 hyperKey2
 
+-Geospatial-
+geoadd geokey1 123.43 32.32 city1
+geoadd geokey3 133.43 26.32 city3 55.66 77.88 city4
+geopos geokey3 city4
+geodist geokey3 city3 city4 km
+georadius geokey3 110 30 3000 km
 
+--Stream--
+xadd myevents * user "friend" event_type "click"
+xrange myevents - +
+xrange myevents - + COUNT 2
+xrevrange myevents + - COUNT 2
+XREAD BLOCK 0 STREAMS myevents $
 
 
 
