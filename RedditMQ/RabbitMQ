@@ -1,0 +1,47 @@
+https://zhuanlan.zhihu.com/p/8768939276
+1. 下载yum源
+wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+2. 生成缓存
+yum clean all && yum makecache
+3. 配置SCLo源
+vim /etc/yum.repos.d/CentOS-SCLo-rh.repo
+会打开一个名字叫CentOS-SCLo-rh.repo的空文件，按i进入编辑状态：把下面的内容复制进去，然后按esc退出，按：wq保存文件
+[centos-sclo-rh]
+name=CentOS-7 - SCLo rh
+baseurl=https://mirrors.aliyun.com/centos/7/sclo/x86_64/rh/
+gpgcheck=1
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
+最后yum install xxx，能用了
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-centos-7
+sudo yum check-update
+curl -fsSL https://get.docker.com/ | sh
+sudo systemctl start docker
+sudo systemctl status docker
+sudo systemctl enable docker
+
+docker images
+docker ps -a
+docker rm 2fd267806f46
+
+# 拉取镜像
+docker pull rabbitmq:3.13-management
+
+# -d 参数：后台运行 Docker 容器
+# --name 参数：设置容器名称
+# -p 参数：映射端口号，格式是“宿主机端口号:容器内端口号”。5672供客户端程序访问，15672供后台管理界面访问
+# -v 参数：卷映射目录
+# -e 参数：设置容器内的环境变量，这里我们设置了登录RabbitMQ管理后台的默认用户和密码
+docker run -d \
+--name rabbitmq \
+-p 5672:5672 \
+-p 15672:15672 \
+-v rabbitmq-plugin:/plugins \
+-e RABBITMQ_DEFAULT_USER=guest \
+-e RABBITMQ_DEFAULT_PASS=123456 \
+rabbitmq:3.13-management
+
+ps -ef | grep rabbitmq
+http://192.168.10.100:15672/
