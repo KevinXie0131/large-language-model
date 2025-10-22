@@ -43,5 +43,9 @@ docker run -d \
 -e RABBITMQ_DEFAULT_PASS=123456 \
 rabbitmq:3.13-management
 
+systemctl stop firewalld
 ps -ef | grep rabbitmq
 http://192.168.10.100:15672/
+
+docker start rabbitmq
+docker stop rabbitmq
