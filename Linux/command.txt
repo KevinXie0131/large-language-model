@@ -16,6 +16,8 @@ i/a/o ESC
 ping {ip}
 ifconfig
 hostname
+vim /etc/hostname
+vim /etc/hosts
 
 ls /usr/sbin/ | grep service
 su
