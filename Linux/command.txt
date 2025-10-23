@@ -3,6 +3,7 @@ man -f {command}
 command --help
 help {command}
 type {command}
+uname -a
 
 vim {file}
 :q
