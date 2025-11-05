@@ -1,0 +1,23 @@
+yum install httpd-tools
+
+ab -n 200 -c 20 http://192.168.10.1:8080/test5
+
+
+redis-server redis6379.conf
+redis-server redis6380.conf
+redis-server redis6381.conf
+
+redis-cli -h 192.168.10.100 -p 6379 -a 123456
+info replication
+
+redis-cli -h 192.168.10.100 -p 6380 -a 123456
+slaveof 192.168.10.100 6379
+info replication
+
+redis-cli -h 192.168.10.100 -p 6381 -a 123456
+slaveof 192.168.10.100 6379
+info replication
+
+slaveof  no one
+
+redis-sentinel sentinel.conf
