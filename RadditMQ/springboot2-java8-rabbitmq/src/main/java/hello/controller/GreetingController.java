@@ -34,5 +34,12 @@ public class GreetingController {
         rabbitTemplate.convertAndSend(EXCHANGE_DIRECT, ROUTING_KEY, "Hello Rabbit!SpringBoot!");
     }
 
+    @RequestMapping("/mq1")
+    public void test7() throws InterruptedException {
+        while(true){
+            rabbitTemplate.convertAndSend(EXCHANGE_DIRECT, ROUTING_KEY, "Hello " + counter.incrementAndGet());
+            Thread.sleep(100);
+        }
 
+    }
 }
