@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
@@ -35,7 +36,11 @@ public class GreetingController {
 
     @RequestMapping("/mq")
     public void test6() {
-        rabbitTemplate.convertAndSend(EXCHANGE_DIRECT, ROUTING_KEY, "Hello Rabbit!SpringBoot!");
+        // 准备消息
+        Map<String,Object> msg = new HashMap<>();
+        msg.put("name", "Jack");
+        msg.put("age", 21);
+        rabbitTemplate.convertAndSend("object.queue", msg);
     }
 
 

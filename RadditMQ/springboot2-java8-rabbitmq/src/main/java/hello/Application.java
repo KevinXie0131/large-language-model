@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -45,5 +47,8 @@ public class Application {
         return builder.build();
     }
 
-
+    @Bean
+    public MessageConverter jacksonMessageConvertor(){
+        return new Jackson2JsonMessageConverter();
+    }
 }

@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.Random;
 
 @Configuration
@@ -89,6 +90,13 @@ public class MyMessageConfig {
     public void process(String dataString, Message message, Channel channel) throws IOException {
         System.out.println("[生产者]" + dataString);
         System.out.println("[消费者]" + new SimpleDateFormat("hh:mm:ss").format(new Date()));
+        channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+    }
+
+
+    @RabbitListener(queues = "object.queue")
+    public void listenObject(Map<String, Object> msg, Message message, Channel channel) throws InterruptedException, IOException {
+        System.out.println("消费者 收到了 object.queue的消息：【" + msg +"】");
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
     }
 }
