@@ -97,6 +97,7 @@ public class MyMessageConfig {
     @RabbitListener(queues = "object.queue")
     public void listenObject(Map<String, Object> msg, Message message, Channel channel) throws InterruptedException, IOException {
         System.out.println("消费者 收到了 object.queue的消息：【" + msg +"】");
+        System.out.println("消费者 收到了 object.queue的消息：【" + message.getMessageProperties().getMessageId() +"】");
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
     }
 }
